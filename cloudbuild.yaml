@@ -20,7 +20,7 @@ steps:
       - 'gcloud'
       - 'run'
       - 'deploy'
-      - 'ems-server'
+      - 'testflask'
       - '--image'
       - 'gcr.io/myprojectems-435411/testflask'
       - '--platform'
