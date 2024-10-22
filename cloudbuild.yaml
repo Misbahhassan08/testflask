@@ -29,6 +29,7 @@ steps:
       - 'us-central1'
       - '--allow-unauthenticated'
       - '--quiet'
+    timeout: 1200s
       
 
 timeout: '1200s'  # Adjust timeout as necessary
