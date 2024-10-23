@@ -5,14 +5,27 @@ steps:
   
   # Step 2: Change directory to the repository
   - name: 'gcr.io/cloud-builders/docker'
-    dir: 'testflask'
-    args: ['build', '-t', 'gcr.io/myprojectems-435411/testflask', '.']
+  # your-repo-directory
+    dir: 'testflask' 
+    args: [
+            'build',
+            '-t',
+            'gcr.io/myprojectems-435411/testflask:${SHORT_SHA}',
+            '-t',
+            'gcr.io/myprojectems-435411/testflask:latest',
+            '--cache-from',
+            'gcr.io/myprojectems-435411/testflask:latest',
+            '.'
+          ]
 
   
   # Step 3: Push the Docker image to Google Container Registry
   - name: 'gcr.io/cloud-builders/docker'
     dir: 'testflask'
     args: ['push', 'gcr.io/myprojectems-435411/testflask']
+
+  # Store images in Google Artifact Registry 
+  - images: ['gcr.io/myprojectems-435411/testflask:latest']
   
   # Step 4: Deploy the Docker image to Google Cloud Run
   - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
