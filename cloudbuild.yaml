@@ -24,8 +24,7 @@ steps:
     dir: 'testflask'
     args: ['push', 'gcr.io/myprojectems-435411/testflask']
 
-  # Store images in Google Artifact Registry 
-  - images: ['gcr.io/myprojectems-435411/testflask:latest']
+  
   
   # Step 4: Deploy the Docker image to Google Cloud Run
   - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
@@ -43,8 +42,11 @@ steps:
       - '--allow-unauthenticated'
       - '--quiet'
     timeout: 3600s
-      
-
+ 
+# Store images in Google Artifact Registry 
+images:
+  - gcr.io/myprojectems-435411/testflask:${SHORT_SHA}
+  - gcr.io/myprojectems-435411/testflask:latest
 timeout: '3600s'  # Adjust timeout as necessary
 options:
   logging: CLOUD_LOGGING_ONLY
